@@ -1,4 +1,4 @@
 # IntelliJ Project Files
 .idea/vcs.xml
 .idea/workspace.xml
-LyricGenerator.iml
+*.iml
