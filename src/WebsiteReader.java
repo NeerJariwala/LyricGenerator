@@ -1,9 +1,11 @@
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import java.util.HashMap;
+
 public class WebsiteReader {
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
 
         //connect to website
         Document doc = Jsoup.connect("http://www.absolutelyrics.com/lyrics/view/conan_gray/idle_town").get();
