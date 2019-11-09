@@ -1,9 +1,8 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class test extends JFrame implements ActionListener {
+public class LyricGenerator extends JFrame implements ActionListener {
 
     private JTextArea output;
     private JButton btnGenerate;
@@ -13,10 +12,10 @@ public class test extends JFrame implements ActionListener {
     private static final int HEIGHT = 600;
 
     public static void main(String[] args) {
-        new test(WIDTH, HEIGHT).setVisible(true);
+        new LyricGenerator(WIDTH, HEIGHT).setVisible(true);
     }
 
-    private test(int width, int height) {
+    private LyricGenerator(int width, int height) {
         // Parameters for the JFrame window
         setTitle("Lyric Generator");
         setSize(width, height);
