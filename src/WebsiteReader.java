@@ -1,20 +1,11 @@
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import javax.swing.*;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.HashMap;
-
 
 public class WebsiteReader extends JFrame{
-
-
 
     public String main(String[] args) throws Exception{
 
@@ -30,8 +21,6 @@ public class WebsiteReader extends JFrame{
         }
 
         links = linksList.toArray(new String[linksList.size()]);
-        //print lyrics
-        System.out.println(links);
 
         // Create the NGramMatcher instance
         NGramMatcher nGramMatcher = new NGramMatcher(3);
@@ -56,10 +45,6 @@ public class WebsiteReader extends JFrame{
             lyrics = lyrics.replaceAll(",", "");
             lyrics = lyrics.replaceAll("&amp;#\\d+;", " ");
 
-            //print lyrics
-            //System.out.println(lyrics);
-
-
             String[] words;
             String delimiter = "\\s";
 
@@ -75,12 +60,6 @@ public class WebsiteReader extends JFrame{
             }
 
             words = list.toArray(new String[list.size()]);
-
-            //print words
-            for (int i = 0; i < words.length; i++) {
-                //System.out.println(words[i]);
-                //System.out.println(words[i].length());
-            }
 
             nGramMatcher.makeNGramsFromInput(words);
         }
