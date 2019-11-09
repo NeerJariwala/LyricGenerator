@@ -7,7 +7,7 @@ import java.util.List;
 
 public class WebsiteReader extends JFrame{
 
-    public String main(String[] args) throws Exception{
+    public String getWebsites() throws Exception{
 
         Document top50 = Jsoup.connect("http://www.absolutelyrics.com/lyrics/top50").get();
 
