@@ -1,17 +1,22 @@
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import javax.swing.*;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import java.util.HashMap;
 
-public class WebsiteReader {
 
-    public static void main(String[] args) throws Exception {
+public class WebsiteReader extends JFrame{
 
+
+
+    public static void main(String[] args) throws Exception{
 
         Document top50 = Jsoup.connect("http://www.absolutelyrics.com/lyrics/top50").get();
 
@@ -47,6 +52,7 @@ public class WebsiteReader {
             lyrics = lyrics.replaceAll("\\(", "");
             lyrics = lyrics.replaceAll("\\)", "");
             lyrics = lyrics.replaceAll(",", "");
+            lyrics = lyrics.replaceAll("&amp;#\\d+;", " ");
 
             //print lyrics
             //System.out.println(lyrics);
