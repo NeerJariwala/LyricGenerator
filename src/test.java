@@ -7,6 +7,7 @@ public class test extends JFrame implements ActionListener {
 
     private JTextArea output;
     private JButton btnGenerate;
+    private JPanel panel;
 
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
@@ -22,9 +23,7 @@ public class test extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Add the form
-        btnGenerate.addActionListener(this);
-        add(output);
-        add(btnGenerate);
+        add(panel);
 
         // Move window to center of screen
         setLocationRelativeTo(null);
