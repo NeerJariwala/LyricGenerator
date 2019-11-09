@@ -7,7 +7,7 @@ import java.util.List;
 
 public class WebsiteReader extends JFrame{
 
-    public String getWebsites() throws Exception{
+    public void getWebsites(NGramMatcher nGramMatcher) throws Exception{
 
         Document top50 = Jsoup.connect("http://www.absolutelyrics.com/lyrics/top50").get();
 
@@ -22,8 +22,7 @@ public class WebsiteReader extends JFrame{
 
         links = linksList.toArray(new String[linksList.size()]);
 
-        // Create the NGramMatcher instance
-        NGramMatcher nGramMatcher = new NGramMatcher(3);
+
 
         for (String s : links) {
             //connect to website
@@ -61,10 +60,10 @@ public class WebsiteReader extends JFrame{
 
             words = list.toArray(new String[list.size()]);
 
+
             nGramMatcher.makeNGramsFromInput(words);
         }
-
         // Print out what it found for NGrams
-        return nGramMatcher.getNGramString();
+        //return nGramMatcher.getNGramString();
     }
 }

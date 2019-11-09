@@ -37,7 +37,7 @@ public class LyricGenerator extends JFrame implements ActionListener {
         if (e.getSource() == btnGenerate) {
             try {
                 System.out.println("Click!");
-                output.append(reader.getWebsites());
+                //reader.getWebsites();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

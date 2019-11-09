@@ -5,7 +5,7 @@ public class SongBuilder{
     LinkedList<String> songWords = new LinkedList<>();
     ArrayList<String> song;
 
-    public LinkedList<String> createSong() {
+    public ArrayList<String> createSong() {
 
         NGramMatcher matcher = new NGramMatcher(3);
 
@@ -18,7 +18,7 @@ public class SongBuilder{
         songWords.add(nextWord);
         song.add(nextWord);
 
-        return songWords;
+        return song;
     }
 
 }
