@@ -107,7 +107,7 @@ class NGramMatcher {
         // remove words as it tries to match them to an NGram
         prevWords = new LinkedList<>(prevWords);
 
-        for (int n = numWordsToMatch; n > 0; n--) {
+        for (int n = numWordsToMatch + 1; n > 0; n--) {
             // Start by trying to match all words, then remove one word at a time
             List<NGram> nGramList = allNGrams.get(n);
 

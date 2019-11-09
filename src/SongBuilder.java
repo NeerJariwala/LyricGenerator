@@ -6,14 +6,17 @@ public class SongBuilder{
         LinkedList<String> songWords = new LinkedList<>();
         ArrayList<String> song = new ArrayList<>();
 
-        if(songWords.size() > nGramMatcher.getN()) {
-            songWords.poll();
+        for (int i = 0; i < 50; i++) {
+
+            String nextWord = nGramMatcher.getNextWord(songWords);
+
+            songWords.add(nextWord);
+            song.add(nextWord);
+
+            if (songWords.size() > nGramMatcher.getN() - 1) {
+                songWords.poll();
+            }
         }
-
-        String nextWord = nGramMatcher.getNextWord(songWords);
-
-        songWords.add(nextWord);
-        song.add(nextWord);
 
         return song;
     }
