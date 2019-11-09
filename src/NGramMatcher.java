@@ -90,15 +90,25 @@ class NGramMatcher {
         allNGrams.get(numWords).add(newGram);
     }
 
+
+
     /**
-     * Prints out all of the NGrams recorded by this NGramMatcher
+     * Makes all of the NGrams recorded by this NGramMatcher into a string
+     * @return String representation of all of the NGrams
      */
-    void printNGrams() {
+    String getNGramString() {
+        StringBuilder outString = new StringBuilder();
+
         for (List<NGram> nGramList : allNGrams) {
             for (NGram nGram : nGramList) {
-                System.out.println(nGram + " " + nGram.getNextWeights());
+                outString.append(nGram);
+                outString.append(" -> ");
+                outString.append(nGram.getNextWeights().toString());
+                outString.append('\n');
             }
         }
+
+        return outString.toString();
     }
 
 }

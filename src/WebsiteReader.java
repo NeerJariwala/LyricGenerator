@@ -86,6 +86,6 @@ public class WebsiteReader extends JFrame{
         }
 
         // Print out what it found for NGrams
-        nGramMatcher.printNGrams();
+        System.out.println(nGramMatcher.getNGramString());
     }
 }
