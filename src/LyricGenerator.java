@@ -36,11 +36,10 @@ public class LyricGenerator extends JFrame implements ActionListener {
         WebsiteReader reader = new WebsiteReader();
         NGramMatcher nGramMatcher = new NGramMatcher(3);
         SongBuilder songBuilder = new SongBuilder();
-        ArrayList<String> generatedSong = new ArrayList<>();
+        ArrayList<String> generatedSong;
 
         if (e.getSource() == btnGenerate) {
             try {
-                System.out.println("Click!");
                 reader.getWebsites(nGramMatcher);
                 generatedSong = songBuilder.createSong(nGramMatcher);
 
