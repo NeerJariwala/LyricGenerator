@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class LyricGenerator extends JFrame implements ActionListener {
 
@@ -33,11 +34,19 @@ public class LyricGenerator extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         WebsiteReader reader = new WebsiteReader();
+        NGramMatcher nGramMatcher = new NGramMatcher(3);
+        SongBuilder songBuilder = new SongBuilder();
+        ArrayList<String> generatedSong = new ArrayList<>();
 
         if (e.getSource() == btnGenerate) {
             try {
                 System.out.println("Click!");
-                //reader.getWebsites();
+                reader.getWebsites(nGramMatcher);
+                generatedSong = songBuilder.createSong(nGramMatcher);
+
+                for (String lyric: generatedSong) {
+                    output.append(lyric);
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

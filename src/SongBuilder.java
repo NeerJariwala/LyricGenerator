@@ -2,18 +2,16 @@ import java.util.*;
 
 public class SongBuilder{
 
-    LinkedList<String> songWords = new LinkedList<>();
-    ArrayList<String> song;
+    public LinkedList<String> songWords = new LinkedList<>();
+    public ArrayList<String> song;
 
-    public ArrayList<String> createSong() {
-
-        NGramMatcher matcher = new NGramMatcher(3);
+    public ArrayList<String> createSong(NGramMatcher nGramMatcher) {
 
         if(songWords.size() > 3) {
             songWords.removeLast();
         }
 
-        String nextWord = matcher.getNextWord(songWords);
+        String nextWord = nGramMatcher.getNextWord(songWords);
 
         songWords.add(nextWord);
         song.add(nextWord);
