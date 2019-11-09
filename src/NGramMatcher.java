@@ -20,6 +20,10 @@ class NGramMatcher {
         }
     }
 
+    public int getN() {
+        return n;
+    }
+
     /**
      * Construct all of the NGram data from an array of contiguous words
      * @param input Words to construct NGrams from
