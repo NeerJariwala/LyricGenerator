@@ -90,7 +90,19 @@ class NGramMatcher {
         allNGrams.get(numWords).add(newGram);
     }
 
+    /**
+     * Pick a next word from the given previous words
+     * @param prevWords Words to match to patterns in n-grams
+     * @return Selected next word
+     */
+    String getNextWord(String[] prevWords) {
+        for (int i = n; i > 0; i--) {
+            List<NGram> nGramList = allNGrams.get(i);
 
+        }
+
+        return "";
+    }
 
     /**
      * Makes all of the NGrams recorded by this NGramMatcher into a string
