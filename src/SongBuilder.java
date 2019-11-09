@@ -8,7 +8,7 @@ public class SongBuilder{
     public ArrayList<String> createSong(NGramMatcher nGramMatcher) {
 
         if(songWords.size() > 3) {
-            songWords.removeLast();
+            songWords.poll();
         }
 
         String nextWord = nGramMatcher.getNextWord(songWords);
