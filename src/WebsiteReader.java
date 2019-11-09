@@ -26,6 +26,8 @@ public class WebsiteReader {
         //print lyrics
         System.out.println(links);
 
+        // Create the NGramMatcher instance
+        NGramMatcher nGramMatcher = new NGramMatcher(3);
 
         for (String s : links) {
             //connect to website
@@ -60,7 +62,7 @@ public class WebsiteReader {
 
             for(String ss : words) {
                 if(ss.length() >= 1) {
-                    list.add(ss);
+                    list.add(ss.toLowerCase());
                 }
             }
 
@@ -72,9 +74,10 @@ public class WebsiteReader {
                 //System.out.println(words[i].length());
             }
 
-            NGramMatcher nGramMatcher = new NGramMatcher(3);
             nGramMatcher.makeNGramsFromInput(words);
         }
 
+        // Print out what it found for NGrams
+        nGramMatcher.printNGrams();
     }
 }

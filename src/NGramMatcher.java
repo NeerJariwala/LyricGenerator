@@ -70,6 +70,14 @@ public class NGramMatcher {
         allNGrams.get(numWords).add(newGram);
     }
 
+    public void printNGrams() {
+        for (List<NGram> nGramList : allNGrams) {
+            for (NGram nGram : nGramList) {
+                System.out.println(nGram + " " + nGram.getNextWeights());
+            }
+        }
+    }
+
 }
 
 class NGram {
@@ -114,16 +122,27 @@ class NGram {
         }
     }
 
+    public String[] getPrev() {
+        return prev;
+    }
+
+    public HashMap<String, Integer> getNextWeights() {
+        return nextWeights;
+    }
+
     @Override
     public String toString() {
         String outStr = "";
 
         // Put the words in the chain together to make one String
-        for (String w : prev) {
-            outStr += w + " ";
+        for (int i = 0; i < prev.length; i++) {
+            outStr += prev[i];
+            if (i < prev.length) {
+                outStr += " ";
+            }
         }
 
-        return outStr.substring(0, outStr.length() - 1);
+        return outStr;
     }
 
 }
