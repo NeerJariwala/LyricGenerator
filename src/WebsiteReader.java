@@ -6,8 +6,6 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.HashMap;
-
 public class WebsiteReader {
 
     public static void main(String[] args) throws Exception {
@@ -70,9 +68,12 @@ public class WebsiteReader {
 
             //print words
             for (int i = 0; i < words.length; i++) {
-                System.out.println(words[i]);
+                //System.out.println(words[i]);
                 //System.out.println(words[i].length());
             }
+
+            NGramMatcher nGramMatcher = new NGramMatcher(3);
+            nGramMatcher.makeNGramsFromInput(words);
         }
 
     }

@@ -1,13 +1,21 @@
-import com.sun.istack.internal.NotNull;
-
 import java.util.*;
 
 public class NGramMatcher {
 
     // List of all the NGrams, organized in an outer list of 1-grams, 2-grams, ..., n-grams
-    List<List<NGram>> allNGrams;
+    private List<List<NGram>> allNGrams = new ArrayList<>();
 
-    public void makeNGramsFromInput(String[] words, int n) {
+    // The max length for the n-grams stored
+    private int n;
+
+    public NGramMatcher(int n) {
+        this.n = n;
+        for (int i = 0; i < n + 1; i++) {
+            allNGrams.add(new ArrayList<>());
+        }
+    }
+
+    public void makeNGramsFromInput(String[] words) {
         // Queue of the recent seen words in order
         Queue<String> recentWords = new LinkedList<>();
 
@@ -34,32 +42,32 @@ public class NGramMatcher {
 
         // Add n-gram for this chain and recursive call on the next
         addNGram(words);
-        return addNGrams(Arrays.copyOfRange(words, 1, words.length - 1)) + 1;
+        return addNGrams(Arrays.copyOfRange(words, 1, words.length)) + 1;
     }
 
     private void addNGram(String[] words) {
         int numWords = words.length;
+        String[] prevWords;
 
         if (numWords == 1) {
-            // Add the word occurrence to the only existing 1-gram
-            allNGrams.get(numWords).get(0).addWordOccurrence(words[0]);
+            // No previous words with only one word
+            prevWords = new String[0];
         } else {
             // Get previous words
-            String[] prevWords = Arrays.copyOfRange(words, 0, words.length - 2);
-
-            // Check if an n-gram with these previous words exists
-            for (NGram nGram : allNGrams.get(numWords)) {
-                if (nGram.matchPrev(prevWords)) {
-                    // Found one, add occurrence of next word and return
-                    nGram.addWordOccurrence(words[numWords - 1]);
-                    return;
-                }
-            }
-
-            // Couldn't find one, need to create it
-            NGram newGram = new NGram(prevWords, words[numWords - 1]);
-            allNGrams.get(numWords).add(newGram);
+            prevWords = Arrays.copyOfRange(words, 0, numWords - 1);
         }
+        // Check if an n-gram with these previous words exists
+        for (NGram nGram : allNGrams.get(numWords)) {
+            if (nGram.matchPrev(prevWords)) {
+                // Found one, add occurrence of next word and return
+                nGram.addWordOccurrence(words[numWords - 1]);
+                return;
+            }
+        }
+
+        // Couldn't find one, need to create it
+        NGram newGram = new NGram(prevWords, words[numWords - 1]);
+        allNGrams.get(numWords).add(newGram);
     }
 
 }
@@ -67,7 +75,7 @@ public class NGramMatcher {
 class NGram {
 
     private String[] prev;
-    private HashMap<String, Integer> nextWeights;
+    private HashMap<String, Integer> nextWeights = new HashMap<>();
     private int n;
 
     NGram(String[] prev, String next) {
