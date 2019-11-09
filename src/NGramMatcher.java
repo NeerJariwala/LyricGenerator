@@ -1,3 +1,5 @@
+import com.sun.istack.internal.NotNull;
+
 import java.util.*;
 
 public class NGramMatcher {
@@ -13,23 +15,26 @@ public class NGramMatcher {
             // Add most recent word to start of queue
             recentWords.add(word);
 
-            if (recentWords.size() > n) {
-                addNGrams(recentWords.toArray(new String[0]));
+            // Ensure n or fewer recent words
+            while (recentWords.size() > n) {
+                recentWords.poll();
             }
 
+            // Add the grams
+            addNGrams(recentWords.toArray(new String[0]));
         }
     }
 
-    private void addNGrams(String[] words) {
+    private int addNGrams(String[] words) {
         // Terminal condition: no more words
         if (words.length == 1) {
             addNGram(words);
-            return;
+            return 1;
         }
 
         // Add n-gram for this chain and recursive call on the next
         addNGram(words);
-        addNGrams(Arrays.copyOfRange(words, 1, words.length - 1));
+        return addNGrams(Arrays.copyOfRange(words, 1, words.length - 1)) + 1;
     }
 
     private void addNGram(String[] words) {
@@ -61,14 +66,14 @@ public class NGramMatcher {
 
 class NGram {
 
-    String[] prev;
-    HashMap<String, Integer> nextWeights;
-    int n;
+    private String[] prev;
+    private HashMap<String, Integer> nextWeights;
+    private int n;
 
     NGram(String[] prev, String next) {
         this.prev = prev;
-        this.nextWeights.put(next, 1);
         this.n = prev.length + 1;
+        addWordOccurrence(next);
     }
 
     boolean matchPrev(String[] otherPrev) {
@@ -90,18 +95,15 @@ class NGram {
         return true;
     }
 
-    int addWordOccurrence(String word) {
-        int numOccurrences;
+    void addWordOccurrence(String word) {
+        int numOccurrences = 1;
 
         if (nextWeights.containsKey(word)) {
             numOccurrences = nextWeights.get(word) + 1;
             nextWeights.replace(word, numOccurrences);
         } else {
-            numOccurrences = 1;
             nextWeights.put(word, numOccurrences);
         }
-
-        return numOccurrences;
     }
 
     @Override
