@@ -90,6 +90,20 @@ class NGram {
         return true;
     }
 
+    int addWordOccurrence(String word) {
+        int numOccurrences;
+
+        if (nextWeights.containsKey(word)) {
+            numOccurrences = nextWeights.get(word) + 1;
+            nextWeights.replace(word, numOccurrences);
+        } else {
+            numOccurrences = 1;
+            nextWeights.put(word, numOccurrences);
+        }
+
+        return numOccurrences;
+    }
+
     @Override
     public String toString() {
         String outStr = "";
