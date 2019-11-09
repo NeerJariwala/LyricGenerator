@@ -2,10 +2,9 @@ import java.util.*;
 
 public class SongBuilder{
 
-    public LinkedList<String> songWords = new LinkedList<>();
-    public ArrayList<String> song;
-
     public ArrayList<String> createSong(NGramMatcher nGramMatcher) {
+        LinkedList<String> songWords = new LinkedList<>();
+        ArrayList<String> song = new ArrayList<>();
 
         if(songWords.size() > nGramMatcher.getN()) {
             songWords.poll();
