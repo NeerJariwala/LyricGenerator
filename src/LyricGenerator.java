@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class LyricGenerator extends JFrame implements ActionListener {
 
@@ -32,14 +33,15 @@ public class LyricGenerator extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        Random r = new Random();
         WebsiteReader reader = new WebsiteReader();
-        NGramMatcher nGramMatcher = new NGramMatcher(3);
+        NGramMatcher nGramMatcher = new NGramMatcher(r.nextInt((5 - 3) + 1) + 3);
         SongBuilder songBuilder = new SongBuilder();
         ArrayList<String> generatedSong;
 
         if (e.getSource() == btnGenerate) {
             try {
+                System.out.println(nGramMatcher.getN());
                 reader.getWebsites(nGramMatcher);
                 generatedSong = songBuilder.createSong(nGramMatcher);
                 for (String lyric: generatedSong) {
