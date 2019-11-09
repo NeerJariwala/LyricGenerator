@@ -7,7 +7,7 @@ public class SongBuilder{
 
     public ArrayList<String> createSong(NGramMatcher nGramMatcher) {
 
-        if(songWords.size() > 3) {
+        if(songWords.size() > nGramMatcher.getN()) {
             songWords.poll();
         }
 
