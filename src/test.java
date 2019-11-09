@@ -38,7 +38,7 @@ public class test extends JFrame implements ActionListener {
         if (e.getSource() == btnGenerate) {
             try {
                 System.out.println("Click!");
-                output.append(reader.main(new String[0]));
+                output.append(reader.getWebsites());
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
