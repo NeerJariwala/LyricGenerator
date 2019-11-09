@@ -95,10 +95,13 @@ class NGramMatcher {
      * @param prevWords Words to match to patterns in n-grams
      * @return Selected next word
      */
-    String getNextWord(String[] prevWords) {
-        for (int i = n; i > 0; i--) {
-            List<NGram> nGramList = allNGrams.get(i);
+    String getNextWord(Queue<String> prevWords) {
+        // Try to match all of the given words
+        int numWordsToMatch = prevWords.size();
 
+        for (int i = numWordsToMatch; i > 0; i--) {
+            // Start by trying to match all words,
+            List<NGram> nGramList = allNGrams.get(i);
         }
 
         return "";
