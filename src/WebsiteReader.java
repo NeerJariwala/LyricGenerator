@@ -76,9 +76,12 @@ public class WebsiteReader extends JFrame{
 
             //print words
             for (int i = 0; i < words.length; i++) {
-                System.out.println(words[i]);
+                //System.out.println(words[i]);
                 //System.out.println(words[i].length());
             }
+
+            NGramMatcher nGramMatcher = new NGramMatcher(3);
+            nGramMatcher.makeNGramsFromInput(words);
         }
 
     }
