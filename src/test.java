@@ -24,6 +24,7 @@ public class test extends JFrame implements ActionListener {
 
         // Add the form
         add(panel);
+        btnGenerate.addActionListener(this);
 
         // Move window to center of screen
         setLocationRelativeTo(null);
@@ -32,10 +33,12 @@ public class test extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        WebsiteReader reader = new WebsiteReader();
+
         if (e.getSource() == btnGenerate) {
             try {
                 System.out.println("Click!");
-                WebsiteReader.main(new String[0]);
+                output.append(reader.main(new String[0]));
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

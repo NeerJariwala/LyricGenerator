@@ -16,14 +16,14 @@ public class WebsiteReader extends JFrame{
 
 
 
-    public static void main(String[] args) throws Exception{
+    public String main(String[] args) throws Exception{
 
         Document top50 = Jsoup.connect("http://www.absolutelyrics.com/lyrics/top50").get();
 
         ArrayList<String> linksList = new ArrayList<>();
         String[] links;
 
-        for(int i = 1; i < 51; i++) {
+        for(int i = 1; i < 11; i++) {
             //grab the song links from the website
             String link = top50.select("#left > div > ol > li:nth-child(" + i + ") > a").attr("abs:href");
             linksList.add(link);
@@ -86,6 +86,6 @@ public class WebsiteReader extends JFrame{
         }
 
         // Print out what it found for NGrams
-        System.out.println(nGramMatcher.getNGramString());
+        return nGramMatcher.getNGramString();
     }
 }
