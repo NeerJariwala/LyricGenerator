@@ -107,11 +107,16 @@ class NGramMatcher {
             // Start by trying to match all words, then remove one word at a time
             List<NGram> nGramList = allNGrams.get(n);
 
+            // Iterate over NGrams in list looking for matching one
             for (NGram nGram : nGramList) {
-                if (nGram.matchPrev()) {
-
+                if (nGram.matchPrev(prevWords)) {
+                    // Found match for previous words
+                    return nGram.getWeightedWord();
                 }
             }
+
+            // Didn't find a matching NGram for this n, continue to next
+            prevWords.poll();
         }
 
         return "";
@@ -223,6 +228,32 @@ class NGram {
      */
     public String[] getPrev() {
         return prev;
+    }
+
+    String getWeightedWord() {
+        // Get total weight of all possible choices
+        double weightSum = 0;
+        for (int weight : nextWeights.values()) {
+            weightSum += weight;
+        }
+
+        // Pick a random number [0, weightSum)
+        double rand = weightSum * Math.random();
+        double cumulativeWeight = 0;
+
+        // Select word based on random value
+        for (String word : nextWeights.keySet()) {
+            // Accumulate weight of next word
+            cumulativeWeight += nextWeights.get(word);
+
+            if (rand <= cumulativeWeight) {
+                // Found randomly selected chunk
+                return word;
+            }
+        }
+
+        // Shouldn't get here unless something went wrong in the accumulate weight loop
+        return null;
     }
 
     /**
