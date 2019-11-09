@@ -99,9 +99,19 @@ class NGramMatcher {
         // Try to match all of the given words
         int numWordsToMatch = prevWords.size();
 
-        for (int i = numWordsToMatch; i > 0; i--) {
-            // Start by trying to match all words,
-            List<NGram> nGramList = allNGrams.get(i);
+        // Create deep copy the given queue of words so this can
+        // remove words as it tries to match them to an NGram
+        prevWords = new LinkedList<>(prevWords);
+
+        for (int n = numWordsToMatch; n > 0; n--) {
+            // Start by trying to match all words, then remove one word at a time
+            List<NGram> nGramList = allNGrams.get(n);
+
+            for (NGram nGram : nGramList) {
+                if (nGram.matchPrev()) {
+
+                }
+            }
         }
 
         return "";
@@ -178,6 +188,15 @@ class NGram {
 
         // Arrays of Strings match
         return true;
+    }
+
+    /**
+     * Same as matchPrev(String[]), only takes a Queue
+     * @param otherPrev Chain of words to check
+     * @return true if the chains of words match, false otherwise
+     */
+    boolean matchPrev(Queue<String> otherPrev) {
+        return matchPrev(otherPrev.toArray(new String[0]));
     }
 
     /**
