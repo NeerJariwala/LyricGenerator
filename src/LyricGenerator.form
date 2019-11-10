@@ -21,7 +21,7 @@
         </constraints>
         <properties>
           <background color="-10452533"/>
-          <enabled value="true"/>
+          <enabled value="false"/>
           <font size="28"/>
           <foreground color="-14931369"/>
           <hideActionText value="false"/>

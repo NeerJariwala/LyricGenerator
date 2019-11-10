@@ -45,9 +45,12 @@ public class LyricGenerator extends JFrame implements ActionListener {
             LyricGenerator lyricGenerator = new LyricGenerator(WIDTH, HEIGHT);
             lyricGenerator.setVisible(true);
             nGramMatcher = NGramMatcher.createFromFile(args[0]);
+
+            // GUI stuff
             lyricGenerator.progBar.setString("");
             lyricGenerator.progBar.setIndeterminate(false);
             lyricGenerator.progBar.setVisible(false);
+            lyricGenerator.btnGenerate.setEnabled(true);
         } else {
             System.out.println("\nPlease specify a filepath for NGram data.");
         }
@@ -76,6 +79,8 @@ public class LyricGenerator extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnGenerate) {
+            // GUI stuff
+            btnGenerate.setEnabled(false);
             progBar.setVisible(true);
             progBar.setValue(0);
             progBar.setString("Generating song...");
@@ -98,6 +103,7 @@ public class LyricGenerator extends JFrame implements ActionListener {
                 output.setText(songOutput.toString());
                 progBar.setVisible(false);
                 progBar.setValue(0);
+                btnGenerate.setEnabled(true);
             }).start();
         }
     }
