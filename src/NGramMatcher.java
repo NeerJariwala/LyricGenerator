@@ -1,6 +1,7 @@
+import java.io.*;
 import java.util.*;
 
-class NGramMatcher {
+class NGramMatcher implements Serializable {
 
     // List of all the NGrams
     // Organized in an outer list of 1-grams, 2-grams, ..., n-grams
@@ -20,7 +21,11 @@ class NGramMatcher {
         }
     }
 
-    public int getN() {
+    /**
+     * Gets the value of n that this NGramMatcher will store
+     * @return Value of n
+     */
+    int getN() {
         return n;
     }
 
@@ -143,6 +148,52 @@ class NGramMatcher {
         }
 
         return outString.toString();
+    }
+
+    /**
+     * Writes the NGramMatcher's data to the given file
+     * @param filePath Where to write the data to
+     * @return true if the file writing was successful, false otherwise
+     */
+    boolean writeToFile(String filePath) {
+        try {
+            // Start a file output stream to write all of the object data to
+            FileOutputStream fileOut = new FileOutputStream(filePath);
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(this);
+            objectOut.close();
+
+            // File write successful
+            return true;
+        } catch (Exception ex) {
+            // File write failed!
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Reads the NGramMatcher's data from a given file
+     * @param filePath Where to read the data from
+     * @return NGramMatcher created with the data from the file
+     */
+    static NGramMatcher createFromFile(String filePath) {
+        try {
+            // Start a file input stream to read all of the object data from
+            FileInputStream fileIn = new FileInputStream(filePath);
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+
+            // Create an NGramMatcher from the data
+            NGramMatcher nGramMatcher = (NGramMatcher) objectIn.readObject();
+            objectIn.close();
+
+            // File read successful
+            return nGramMatcher;
+        } catch (Exception ex) {
+            // File write failed!
+            ex.printStackTrace();
+            return null;
+        }
     }
 
 }

@@ -55,6 +55,8 @@ public class LyricGenerator extends JFrame implements ActionListener {
             }
 
         }
+
+        nGramMatcher.writeToFile("/NGramData.ser");
     }
 
 }
