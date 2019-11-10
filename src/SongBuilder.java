@@ -19,10 +19,13 @@ public class SongBuilder{
 
                 for (int i = 0; i < randomN; i++) {
                     String nextWord = nGramMatcher.getNextWord(songWords);
-
+                    if(i == 0) {
+                        nextWord = nextWord.substring(0, 1).toUpperCase() + nextWord.substring(1);
+                    }
                     songWords.add(nextWord);
                     song.add(nextWord);
                     song.add(" ");
+
 
                     if (songWords.size() > nGramMatcher.getN() - 1) {
                         songWords.poll();
