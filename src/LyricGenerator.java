@@ -1,4 +1,7 @@
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -6,12 +9,16 @@ import java.util.Random;
 
 public class LyricGenerator extends JFrame implements ActionListener {
 
-    private JTextArea output;
+    private JTextPane output;
     private JButton btnGenerate;
     private JPanel panel;
 
-    private static final int WIDTH = 800;
-    private static final int HEIGHT = 600;
+    private static final int WIDTH = 1200;
+    private static final int HEIGHT = 900;
+
+    // Generated song output
+    private final StringBuilder songOutput = new StringBuilder();
+    private final String SONG_DIVIDER = "********************************\n\n";
 
     // Build data variables
     private static final int N = 3;
@@ -55,6 +62,12 @@ public class LyricGenerator extends JFrame implements ActionListener {
 
         // Move window to center of screen
         setLocationRelativeTo(null);
+
+        // Make text field centered
+        StyledDocument doc = output.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
     }
 
     @Override
@@ -67,12 +80,13 @@ public class LyricGenerator extends JFrame implements ActionListener {
                 System.out.println(nGramMatcher.getN());
                 generatedSong = songBuilder.createSong(nGramMatcher);
                 for (String lyric : generatedSong) {
-                    output.append(lyric);
+                    songOutput.append(lyric);
                 }
+                songOutput.append(SONG_DIVIDER);
+                output.setText(songOutput.toString());
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-
         }
     }
 

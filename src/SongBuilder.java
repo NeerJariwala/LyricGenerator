@@ -38,11 +38,6 @@ public class SongBuilder{
             song.add("\n");
         }
 
-        song.add("\n");
-        song.add("\n");
-        song.add("\n");
-        song.add("\n");
-        song.add("\n");
         return song;
     }
 
