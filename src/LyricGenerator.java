@@ -36,8 +36,9 @@ public class LyricGenerator extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Random r = new Random();
+        int randomN = r.nextInt(MAX_N - MIN_N + 1) + MIN_N;
         WebsiteReader reader = new WebsiteReader();
-        NGramMatcher nGramMatcher = new NGramMatcher(r.nextInt(MAX_N - MIN_N + 1) + MIN_N);
+        NGramMatcher nGramMatcher = new NGramMatcher(randomN);
         SongBuilder songBuilder = new SongBuilder();
         ArrayList<String> generatedSong;
 
