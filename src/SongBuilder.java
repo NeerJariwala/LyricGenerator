@@ -6,10 +6,10 @@ public class SongBuilder{
         LinkedList<String> songWords = new LinkedList<>();
         ArrayList<String> song = new ArrayList<>();
         int x = 1;
+        Random r = new Random();
+        int randomN = r.nextInt(9 - 7 + 1) + 7;
 
         for (int i = 0; i < 50; i++) {
-            Random r = new Random();
-            int randomN = r.nextInt(9 - 7 + 1) + 7;
             String nextWord = nGramMatcher.getNextWord(songWords);
 
             songWords.add(nextWord);
@@ -19,6 +19,7 @@ public class SongBuilder{
                 song.add("\n");
                 x++;
                 System.out.println(randomN);
+                randomN = r.nextInt(9 - 7 + 1) + 7;
             }
 
 
