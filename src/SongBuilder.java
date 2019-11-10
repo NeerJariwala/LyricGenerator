@@ -7,7 +7,7 @@ public class SongBuilder{
         LinkedList<String> songWords = new LinkedList<>();
         ArrayList<String> song = new ArrayList<>();
         Random s = new Random();
-        int stanzas = s.nextInt(8 - 5 + 1) + 5;
+        int stanzas = s.nextInt(9 - 6 + 1) + 6;
 
         progBar.setMinimum(0);
         progBar.setMaximum(stanzas * 7);
@@ -17,9 +17,22 @@ public class SongBuilder{
             Random l = new Random();
             int lines = l.nextInt(9 - 5 + 1) + 5;
 
+            if (k == 0) {
+                // Generate title
+                lines = 1;
+            }
+
             for (int j = 0; j < lines; j++) {
                 Random r = new Random();
-                int randomN = r.nextInt(9 - 7 + 1) + 7;
+                int randomN;
+
+                if (k == 0) {
+                    // Title
+                    randomN = r.nextInt(6) + 1;
+                } else {
+                    // Not title
+                    randomN = r.nextInt(9 - 7 + 1) + 7;
+                }
 
                 for (int i = 0; i < randomN; i++) {
                     String nextWord = nGramMatcher.getNextWord(songWords);
@@ -31,7 +44,13 @@ public class SongBuilder{
                         nextWord = censorWord(nextWord);
                     }
                     songWords.add(nextWord);
-                    song.add(nextWord);
+                    if (k == 0) {
+                        // Title
+                        song.add(nextWord.toUpperCase());
+                    } else {
+                        // Not title
+                        song.add(nextWord);
+                    }
                     song.add(" ");
 
 

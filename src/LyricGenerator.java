@@ -41,18 +41,21 @@ public class LyricGenerator extends JFrame implements ActionListener {
 
             // Write to the file
             nGramMatcher.writeToFile(args[1]);
-        } else if (args.length == 1) {
+        } else {
+            String nGramDataFilePath = "NGramData\\AllSongs.ser";
+
+            if (args.length == 1) {
+                nGramDataFilePath = args[0];
+            }
             LyricGenerator lyricGenerator = new LyricGenerator(WIDTH, HEIGHT);
             lyricGenerator.setVisible(true);
-            nGramMatcher = NGramMatcher.createFromFile(args[0]);
+            nGramMatcher = NGramMatcher.createFromFile(nGramDataFilePath);
 
             // GUI stuff
             lyricGenerator.progBar.setString("");
             lyricGenerator.progBar.setIndeterminate(false);
             lyricGenerator.progBar.setVisible(false);
             lyricGenerator.btnGenerate.setEnabled(true);
-        } else {
-            System.out.println("\nPlease specify a filepath for NGram data.");
         }
     }
 
