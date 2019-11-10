@@ -12,6 +12,8 @@ public class LyricGenerator extends JFrame implements ActionListener {
 
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
+    private static final int MIN_N = 3;
+    private static final int MAX_N = 5;
 
     public static void main(String[] args) {
         new LyricGenerator(WIDTH, HEIGHT).setVisible(true);
@@ -35,7 +37,7 @@ public class LyricGenerator extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Random r = new Random();
         WebsiteReader reader = new WebsiteReader();
-        NGramMatcher nGramMatcher = new NGramMatcher(r.nextInt((5 - 3) + 1) + 3);
+        NGramMatcher nGramMatcher = new NGramMatcher(r.nextInt(MAX_N - MIN_N + 1) + MIN_N);
         SongBuilder songBuilder = new SongBuilder();
         ArrayList<String> generatedSong;
 
