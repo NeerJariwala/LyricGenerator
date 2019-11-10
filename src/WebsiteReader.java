@@ -5,9 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * Reads webpages from www.absolutelyrics.com from which to create n-gram data
+ */
 public class WebsiteReader extends JFrame{
 
-    public void getWebsites(NGramMatcher nGramMatcher) throws Exception{
+    /**
+     * Reads the lyrics of the top 50 songs and passes their words to the given
+     * NGramMatcher to build the NGrams
+     * @param nGramMatcher
+     * @throws Exception
+     */
+    public void readWebsiteData(NGramMatcher nGramMatcher) throws Exception{
 
         Document top50 = Jsoup.connect("http://www.absolutelyrics.com/lyrics/top50").get();
 
