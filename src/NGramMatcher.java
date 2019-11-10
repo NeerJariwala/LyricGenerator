@@ -203,7 +203,7 @@ class NGramMatcher implements Serializable {
  * come a map that stores all of the potential next words and their weights
  * used for generating words that follow that chain.
  */
-class NGram {
+class NGram implements Serializable {
 
     // The chain of words that comes before
     private String[] prev;

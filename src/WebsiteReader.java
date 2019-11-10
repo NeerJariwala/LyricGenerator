@@ -18,7 +18,7 @@ public class WebsiteReader extends JFrame{
      */
     public void readWebsiteData(NGramMatcher nGramMatcher) throws Exception{
 
-        for (char alphabet = 'a'; alphabet <='z'; alphabet++) {
+        for (char alphabet = 'a'; alphabet <='d'; alphabet++) {
             Document top50 = Jsoup.connect("http://www.absolutelyrics.com/lyrics/songlist/" + alphabet).get();
 
             ArrayList<String> linksList = new ArrayList<>();
@@ -38,7 +38,7 @@ public class WebsiteReader extends JFrame{
                     break;
             }
 
-            for(int i = 1; i < numOfLinks; i++) {
+            for(int i = 1; i < 2; i++) {
                 //grab the song links from the website
                 String link = top50.select("#left > div.songlist > ul > li:nth-child(" + i + ") > a").attr("abs:href");
                 linksList.add(link);
