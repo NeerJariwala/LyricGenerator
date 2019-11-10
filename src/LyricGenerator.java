@@ -77,7 +77,6 @@ public class LyricGenerator extends JFrame implements ActionListener {
 
         if (e.getSource() == btnGenerate) {
             try {
-                System.out.println(nGramMatcher.getN());
                 generatedSong = songBuilder.createSong(nGramMatcher);
                 for (String lyric : generatedSong) {
                     songOutput.append(lyric);
