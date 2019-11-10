@@ -13,7 +13,7 @@ public class LyricGenerator extends JFrame implements ActionListener {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
     private static final int MIN_N = 3;
-    private static final int MAX_N = 5;
+    private static final int MAX_N = 3;
 
     public static void main(String[] args) {
         new LyricGenerator(WIDTH, HEIGHT).setVisible(true);
