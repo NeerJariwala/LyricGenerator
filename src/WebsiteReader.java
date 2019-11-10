@@ -68,6 +68,7 @@ public class WebsiteReader extends JFrame{
                 lyrics = lyrics.replaceAll(",", "");
                 lyrics = lyrics.replaceAll("\"", "");
                 lyrics = lyrics.replaceAll("&amp;#\\d+;", " ");
+                //lyrics = lyrics.replaceAll(" *_* ", " ");
 
                 String[] words;
                 String delimiter = "\\s";

@@ -26,6 +26,10 @@ public class SongBuilder{
                     if(i == 0) {
                         nextWord = nextWord.substring(0, 1).toUpperCase() + nextWord.substring(1);
                     }
+
+                    if(nextWord.contains("_")) {
+                        nextWord = censorWord(nextWord);
+                    }
                     songWords.add(nextWord);
                     song.add(nextWord);
                     song.add(" ");
@@ -46,6 +50,10 @@ public class SongBuilder{
         }
 
         return song;
+    }
+
+    private String censorWord(String word) {
+        return word.substring(0, 1) + "****";
     }
 
 }
