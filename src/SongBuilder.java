@@ -1,12 +1,17 @@
+import javax.swing.*;
 import java.util.*;
 
 public class SongBuilder{
 
-    public ArrayList<String> createSong(NGramMatcher nGramMatcher) {
+    public ArrayList<String> createSong(NGramMatcher nGramMatcher, JProgressBar progBar) {
         LinkedList<String> songWords = new LinkedList<>();
         ArrayList<String> song = new ArrayList<>();
         Random s = new Random();
         int stanzas = s.nextInt(8 - 5 + 1) + 5;
+
+        progBar.setMinimum(0);
+        progBar.setMaximum(stanzas * 7);
+        progBar.setVisible(true);
 
         for (int k = 0; k < stanzas; k++) {
             Random l = new Random();
@@ -31,6 +36,9 @@ public class SongBuilder{
                     }
                 }
                 song.add("\n");
+
+                // Update progress bar after each line
+                progBar.setValue(Math.max(k * 7 + j, progBar.getValue()));
             }
 
             song.add("\n");

@@ -12,6 +12,7 @@ public class LyricGenerator extends JFrame implements ActionListener {
     private JTextPane output;
     private JButton btnGenerate;
     private JPanel panel;
+    private JProgressBar progBar;
 
     private static final int WIDTH = 1200;
     private static final int HEIGHT = 900;
@@ -40,12 +41,14 @@ public class LyricGenerator extends JFrame implements ActionListener {
 
             // Write to the file
             nGramMatcher.writeToFile(args[1]);
-        }
-        else if (args.length == 1) {
+        } else if (args.length == 1) {
+            LyricGenerator lyricGenerator = new LyricGenerator(WIDTH, HEIGHT);
+            lyricGenerator.setVisible(true);
             nGramMatcher = NGramMatcher.createFromFile(args[0]);
-            new LyricGenerator(WIDTH, HEIGHT).setVisible(true);
-        }
-        else {
+            lyricGenerator.progBar.setString("");
+            lyricGenerator.progBar.setIndeterminate(false);
+            lyricGenerator.progBar.setVisible(false);
+        } else {
             System.out.println("\nPlease specify a filepath for NGram data.");
         }
     }
@@ -72,21 +75,30 @@ public class LyricGenerator extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        SongBuilder songBuilder = new SongBuilder();
-        ArrayList<String> generatedSong;
-
         if (e.getSource() == btnGenerate) {
-            try {
-                System.out.println(nGramMatcher.getN());
-                generatedSong = songBuilder.createSong(nGramMatcher);
-                for (String lyric : generatedSong) {
-                    songOutput.append(lyric);
+            progBar.setVisible(true);
+            progBar.setValue(0);
+            progBar.setString("Generating song...");
+
+            new Thread(() -> {
+                SongBuilder songBuilder = new SongBuilder();
+                ArrayList<String> generatedSong;
+
+                try {
+                    generatedSong = songBuilder.createSong(nGramMatcher, progBar);
+
+                    for (String lyric : generatedSong) {
+                        songOutput.append(lyric);
+                    }
+                    songOutput.append(SONG_DIVIDER);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
-                songOutput.append(SONG_DIVIDER);
+
                 output.setText(songOutput.toString());
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+                progBar.setVisible(false);
+                progBar.setValue(0);
+            }).start();
         }
     }
 
