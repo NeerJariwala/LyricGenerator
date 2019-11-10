@@ -1,4 +1,8 @@
 # IntelliJ Project Files
 .idea/vcs.xml
 .idea/workspace.xml
+.idea/codeStyles/*
 *.iml
+
+# Build directory
+/out/*

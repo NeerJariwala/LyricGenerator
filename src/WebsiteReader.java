@@ -1,30 +1,27 @@
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WebsiteReader {
 
-    public static void main(String[] args) throws Exception{
+public class WebsiteReader extends JFrame{
 
+    public void getWebsites(NGramMatcher nGramMatcher) throws Exception{
 
         Document top50 = Jsoup.connect("http://www.absolutelyrics.com/lyrics/top50").get();
 
         ArrayList<String> linksList = new ArrayList<>();
         String[] links;
 
-        for(int i = 1; i < 51; i++) {
+        for(int i = 1; i < 11; i++) {
             //grab the song links from the website
             String link = top50.select("#left > div > ol > li:nth-child(" + i + ") > a").attr("abs:href");
             linksList.add(link);
         }
 
         links = linksList.toArray(new String[linksList.size()]);
-        //print lyrics
-        System.out.println(links);
+
 
 
         for (String s : links) {
@@ -45,10 +42,7 @@ public class WebsiteReader {
             lyrics = lyrics.replaceAll("\\(", "");
             lyrics = lyrics.replaceAll("\\)", "");
             lyrics = lyrics.replaceAll(",", "");
-
-            //print lyrics
-            //System.out.println(lyrics);
-
+            lyrics = lyrics.replaceAll("&amp;#\\d+;", " ");
 
             String[] words;
             String delimiter = "\\s";
@@ -60,18 +54,16 @@ public class WebsiteReader {
 
             for(String ss : words) {
                 if(ss.length() >= 1) {
-                    list.add(ss);
+                    list.add(ss.toLowerCase());
                 }
             }
 
             words = list.toArray(new String[list.size()]);
 
-            //print words
-            for (int i = 0; i < words.length; i++) {
-                System.out.println(words[i]);
-                //System.out.println(words[i].length());
-            }
-        }
 
+            nGramMatcher.makeNGramsFromInput(words);
+        }
+        // Print out what it found for NGrams
+        //return nGramMatcher.getNGramString();
     }
 }
