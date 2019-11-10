@@ -38,7 +38,7 @@ public class WebsiteReader extends JFrame{
                     break;
             }
 
-            for(int i = 1; i < 2; i++) {
+            for(int i = 1; i < numOfLinks; i++) {
                 //grab the song links from the website
                 String link = top50.select("#left > div.songlist > ul > li:nth-child(" + i + ") > a").attr("abs:href");
                 linksList.add(link);
