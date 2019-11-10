@@ -15,7 +15,6 @@ public class SongBuilder{
             for (int j = 0; j < lines; j++) {
                 Random r = new Random();
                 int randomN = r.nextInt(9 - 7 + 1) + 7;
-                System.out.println(randomN);
 
                 for (int i = 0; i < randomN; i++) {
                     String nextWord = nGramMatcher.getNextWord(songWords);
