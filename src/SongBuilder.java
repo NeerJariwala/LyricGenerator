@@ -5,27 +5,34 @@ public class SongBuilder{
     public ArrayList<String> createSong(NGramMatcher nGramMatcher) {
         LinkedList<String> songWords = new LinkedList<>();
         ArrayList<String> song = new ArrayList<>();
-        int x = 1;
-        Random r = new Random();
-        int randomN = r.nextInt(9 - 7 + 1) + 7;
+        Random s = new Random();
+        int stanzas = s.nextInt(8 - 5 + 1) + 5;
 
-        for (int i = 0; i < 50; i++) {
-            String nextWord = nGramMatcher.getNextWord(songWords);
+        for (int k = 0; k < stanzas; k++) {
+            Random l = new Random();
+            int lines = l.nextInt(9 - 5 + 1) + 5;
 
-            songWords.add(nextWord);
-            song.add(nextWord);
-            song.add(" ");
-            if(i >= randomN * x) {
-                song.add("\n");
-                x++;
+            for (int j = 0; j < lines; j++) {
+                Random r = new Random();
+                int randomN = r.nextInt(9 - 7 + 1) + 7;
                 System.out.println(randomN);
-                randomN = r.nextInt(9 - 7 + 1) + 7;
+
+                for (int i = 0; i < randomN; i++) {
+                    String nextWord = nGramMatcher.getNextWord(songWords);
+
+                    songWords.add(nextWord);
+                    song.add(nextWord);
+                    song.add(" ");
+
+                    if (songWords.size() > nGramMatcher.getN() - 1) {
+                        songWords.poll();
+                    }
+                }
+                song.add("\n");
             }
 
-
-            if (songWords.size() > nGramMatcher.getN() - 1) {
-                songWords.poll();
-            }
+            song.add("\n");
+            song.add("\n");
         }
 
         return song;

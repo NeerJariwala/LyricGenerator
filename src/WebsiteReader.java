@@ -18,14 +18,14 @@ public class WebsiteReader extends JFrame{
      */
     public void readWebsiteData(NGramMatcher nGramMatcher) throws Exception{
 
-        Document top50 = Jsoup.connect("http://www.absolutelyrics.com/lyrics/top50").get();
+        Document top50 = Jsoup.connect("http://www.absolutelyrics.com/lyrics/songlist/a").get();
 
         ArrayList<String> linksList = new ArrayList<>();
         String[] links;
 
-        for(int i = 1; i < 11; i++) {
+        for(int i = 1; i < 501; i++) {
             //grab the song links from the website
-            String link = top50.select("#left > div > ol > li:nth-child(" + i + ") > a").attr("abs:href");
+            String link = top50.select("#left > div.songlist > ul > li:nth-child(" + i + ") > a").attr("abs:href");
             linksList.add(link);
         }
 
