@@ -13,6 +13,7 @@ public class LyricGenerator extends JFrame implements ActionListener {
     private JButton btnGenerate;
     private JPanel panel;
     private JProgressBar progBar;
+    private JScrollPane scrollPane;
 
     private static final int WIDTH = 1200;
     private static final int HEIGHT = 900;
@@ -103,10 +104,12 @@ public class LyricGenerator extends JFrame implements ActionListener {
                     ex.printStackTrace();
                 }
 
+                // GUI stuff
                 output.setText(songOutput.toString());
                 progBar.setVisible(false);
                 progBar.setValue(0);
                 btnGenerate.setEnabled(true);
+                scrollPane.getVerticalScrollBar().setValue(Integer.MAX_VALUE);
             }).start();
         }
     }
